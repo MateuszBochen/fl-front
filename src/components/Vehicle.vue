@@ -31,6 +31,7 @@
       id="modal-1"
       :title="modalTitle()"
       @ok="okModal"
+      @close="closeModal()"
     >
       <VehicleForm
         :formData="formData"
@@ -165,8 +166,10 @@ export default {
               this.items.push({lp, ...item});
             }
           });
+          this.idToEdit = null;
         })
         .catch(error => {
+          this.idToEdit = null;
           this.isLoading = false;
           console.log(error);
         });
@@ -210,6 +213,9 @@ export default {
         return 'Edytuj edytuj';
       }
       return 'Dodaj pojazd'
+    },
+    closeModal(){
+      this.idToEdit = null;
     }
   }
 }
